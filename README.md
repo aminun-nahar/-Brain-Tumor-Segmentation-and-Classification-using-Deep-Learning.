@@ -1,65 +1,59 @@
-# Brain-Tumor-Detection-using-Knowledge-Distillation
-Ongoing Project
-#  📌 Overview
+# Brain Tumor Segmentation and Classification using Deep Learning
+📌 Overview
 
-Brain tumor detection from MRI images is a critical task in medical image analysis. Deep learning models achieve high accuracy but are often computationally expensive, limiting deployment in resource-constrained clinical environments.
+This project presents a deep learning-based framework for Brain Tumor Segmentation and Classification from MRI images. The system performs:
 
-This project implements Knowledge Distillation (KD) using a custom Distiller class in TensorFlow/Keras to transfer knowledge from a high-capacity teacher model to a lightweight student model, enabling efficient and accurate brain tumor classification.
+# 🔍 Tumor Region Segmentation
 
-# 🎯 Objective
+🏷️ Tumor Classification
 
-Improve student model performance using teacher supervision
+# 📊 Performance Evaluation using standard medical metrics
 
-Reduce computational complexity for real-world deployment
+The goal is to develop an accurate and computationally efficient model suitable for medical imaging applications.
 
-Maintain high diagnostic accuracy
+# 🎯 Objectives
 
-The dataset contains two classes:
+Automatically segment tumor regions from brain MRI images
 
-Brain Tumor
+Classify images into predefined tumor categories
 
-Eye (Non-tumor class)
+Improve diagnostic support using deep learning
 
-#  🧠 Knowledge Distillation Framework
+Evaluate performance using robust medical metrics
 
-Knowledge Distillation trains a smaller student model to mimic the soft probability outputs of a larger teacher model.
+# 🏗️ Project Pipeline
 
+The overall workflow includes:
 
-​
-## 📌 Loss Function
+Data Preprocessing
 
-The total loss is defined as:
+Image resizing and normalization
 
-$$
-\mathcal{L} = \alpha \cdot \mathcal{L}_{student} + (1 - \alpha) \cdot \mathcal{L}_{distillation}
-$$
+Label encoding
 
+Train-validation split
 
-Where:
+Segmentation Model
 
-Student Loss → Categorical Crossentropy
+CNN-based architecture for tumor localization
 
-Distillation Loss → KL Divergence
+Pixel-wise prediction
 
-Temperature (T = 5.0) → Softens probability distribution
+Classification Model
 
-Alpha (α = 0.5) → Balances student and distillation loss
+Deep neural network for tumor type prediction
 
-#  🏗️ Distiller Model Architecture
+Softmax-based probability output
 
-The custom Distiller class extends keras.Model and includes:
+Model Training
 
-🔹 Core Components
+Optimizer-based backpropagation
 
-Teacher Model (frozen during training)
+Loss monitoring
 
-Student Model (trainable)
+Validation evaluation
 
-Temperature scaling
-
-Alpha weighting factor
-
-🔹 Metrics Tracked
+Performance Evaluation
 
 Accuracy
 
@@ -69,110 +63,28 @@ Recall
 
 AUC
 
-Student Loss
+# 📊 Evaluation Metrics
 
-Distillation Loss
+The following metrics are used:
 
-Total Loss
+Accuracy – Overall correctness
 
-#  ⚙️ Implementation Details
-Training Flow
-
-Forward pass through teacher (no gradient update)
-
-Forward pass through student
-
-Compute:
-
-Hard label loss (Categorical Crossentropy)
-
-Soft label loss (KL Divergence with temperature scaling)
-
-Combine losses
-
-Backpropagation updates only student model
-
-Testing Flow
-
-Only student model is evaluated
-
-Distillation loss is not used during testing
-
-#  📊 Evaluation Metrics
-
-Accuracy – Overall classification performance
-
-Precision – Tumor prediction correctness
+Precision – Positive prediction reliability
 
 Recall (Sensitivity) – Tumor detection capability
 
-AUC – Discriminative ability
+AUC – Classification separability
 
-#  🚀 How to Use
-1️⃣ Initialize Teacher and Student Models
-teacher = build_teacher_model()
-student = build_student_model()
+Loss Curves – Training stability
 
-2️⃣ Create Distiller
-distiller = Distiller(
-    student=student,
-    teacher=teacher,
-    temperature=5.0,
-    alpha=0.5
-)
+⚙️ Technologies Used
 
-3️⃣ Compile
-distiller.compile(
-    optimizer=tf.keras.optimizers.Adam()
-)
+Python
 
-4️⃣ Train
-distiller.fit(train_dataset, validation_data=val_dataset, epochs=50)
+TensorFlow / Keras
 
+NumPy
 
+Matplotlib
 
-# 🔬 Key Contributions
-
-Custom Keras-based Knowledge Distillation pipeline
-
-Balanced hard and soft label supervision
-
-Improved lightweight model performance
-
-Suitable for clinical edge deployment
-
-# 🏥 Applications
-
-Automated brain tumor screening
-
-Clinical decision support systems
-
-Medical AI edge deployment
-
-Resource-limited healthcare setups
-
-#  📈 Future Improvements
-
-Multi-class tumor classification
-
-Integration with Grad-CAM for explainability
-
-Hybrid CNN-Transformer teacher models
-
-Quantization-aware training for further compression
-
-# 📜 Citation
-
-If you use this work, please cite:
-
-@article{brain_tumor_kd2026,
-  title={Brain Tumor Detection using Knowledge Distillation},
-  author={Your Name},
-  year={2026}
-}
-
-
-
-Help write the methodology section for journal submission
-
-Optimize the Distiller class for binary classification (since you have 2 classes)
+Scikit-learn
